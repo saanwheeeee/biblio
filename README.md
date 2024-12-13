@@ -13,16 +13,27 @@
             color: #333;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #a2d5f2; /* Pastel blue */
             color: white;
             padding: 20px;
             text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
         }
         nav {
-            display: flex;
+            display: none;
             justify-content: center;
-            background-color: #333;
+            background-color: #a2d5f2; /* Pastel blue */
             padding: 10px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         nav a {
             color: white;
@@ -33,14 +44,36 @@
             transition: background-color 0.3s;
         }
         nav a:hover {
-            background-color: #4CAF50;
+            background-color: #7bb1d1;
         }
         main {
             text-align: center;
-            margin: 20px;
+            margin: 120px 20px 20px; /* To account for the fixed header */
             font-size: 1.2em;
         }
+        .scrolled header {
+            transform: translateY(-100%);
+        }
+        .scrolled nav {
+            display: flex;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > lastScrollY) {
+                    document.body.classList.add('scrolled');
+                } else {
+                    document.body.classList.remove('scrolled');
+                }
+                lastScrollY = window.scrollY;
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -58,3 +91,4 @@
     </main>
 </body>
 </html>
+
